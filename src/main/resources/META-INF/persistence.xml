@@ -6,7 +6,7 @@
 
     <persistence-unit name="rasFood" transaction-type="RESOURCE_LOCAL">
 <!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
-<!--        <class>br.com.rasmoo.restaurante.entity.Prato</class>-->
+<!--        <class>br.com.rasmoo.restaurante.entity.Cardapio</class>-->
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
