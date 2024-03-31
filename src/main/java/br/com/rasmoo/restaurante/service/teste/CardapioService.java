@@ -30,7 +30,8 @@ public class CardapioService {
         System.out.println();
         System.out.println(cardapioDao.consultarPorNome("maria isabel"));
 
-        entityManager.close();
+        entityManager.flush();
+        entityManager.clear();
 
     }
 

@@ -22,8 +22,8 @@ public class Cardapio {
     @ManyToOne
     private Categoria categoria;
 
-    @ManyToMany(mappedBy = "cardapioList")
-    private List<Ordem> ordemList;
+//    @ManyToMany(mappedBy = "cardapioList")
+//    private List<Ordem> ordemList;
 
     public Cardapio() {
     }

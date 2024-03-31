@@ -63,8 +63,8 @@ public class CargaDeDadosUtil {
         cardapioDao.cadastrar(risoto);
         cardapioDao.cadastrar(mariaIsabel);
 
-        entityManager.getTransaction().commit();
-//        entityManager.flush();
+//        entityManager.getTransaction().commit();
+        entityManager.flush();
         entityManager.clear();
 
 

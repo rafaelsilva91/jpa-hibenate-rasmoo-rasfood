@@ -1,6 +1,5 @@
 package br.com.rasmoo.restaurante.dao;
 
-import br.com.rasmoo.restaurante.entity.Cardapio;
 import br.com.rasmoo.restaurante.entity.Categoria;
 
 import javax.persistence.EntityManager;

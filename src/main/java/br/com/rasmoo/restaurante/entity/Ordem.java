@@ -3,10 +3,11 @@ package br.com.rasmoo.restaurante.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "ordem")
+@Table(name = "ordens")
 public class Ordem {
 
     @Id
@@ -14,7 +15,7 @@ public class Ordem {
     private Integer id;
 
     @Column(name = "valor_total")
-    private BigDecimal valorTotal;
+    private BigDecimal valorTotal = BigDecimal.ZERO;
 
     @Column(name = "valor_de_criacao")
     private LocalDateTime dataDeCriacao = LocalDateTime.now();
@@ -22,15 +23,26 @@ public class Ordem {
     @ManyToOne
     private Cliente cliente;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ordens_cardapio",
-            joinColumns = @JoinColumn(name = "ordens_id"),
-            inverseJoinColumns = @JoinColumn(name = "cardapio_id")
-    )
-    private List<Cardapio> cardapioList;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "ordens_cardapio",
+//            joinColumns = @JoinColumn(name = "ordens_id"),
+//            inverseJoinColumns = @JoinColumn(name = "cardapio_id")
+//    )
+//    private List<Cardapio> cardapioList;
+
+    @OneToMany(mappedBy = "ordem", cascade = CascadeType.ALL)
+    private List<OrdensCardapio> ordensCardapioList = new ArrayList<>();
 
     public Ordem() {
+    }
+
+    public void addOrdensCardapio(OrdensCardapio ordensCardapio){
+        ordensCardapio.setOrdem(this);
+        this.ordensCardapioList.add(ordensCardapio);
+        this.valorTotal = valorTotal.add(ordensCardapio
+                .getValorDeRegistro()
+                .multiply(BigDecimal.valueOf(ordensCardapio.getQuantidade())));
     }
 
     public Ordem(Cliente cliente) {
@@ -67,6 +79,10 @@ public class Ordem {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<OrdensCardapio> getOrdensCardapioList() {
+        return ordensCardapioList;
     }
 
     @Override
